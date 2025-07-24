@@ -6,6 +6,10 @@ from datasets import load_dataset
 import os
 from utils import create_prompt_for_query
 
+# LOAD ENV VARIABLES
+from dotenv import load_dotenv
+load_dotenv()
+
 # --- Configuration ---
 system_prompt_file = os.getenv("SYSTEM_PROMPT_FILE", "system_prompt.txt")
 model_path = os.getenv("MERGED_MODEL_OUTPUT_DIRECTORY", "intent-classifier-final")

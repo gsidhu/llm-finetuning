@@ -4,6 +4,9 @@
 import json
 import os
 from pathlib import Path
+# LOAD ENV VARIABLES
+from dotenv import load_dotenv
+load_dotenv()
 
 def diagnose_jsonl_file(file_path):
     """Diagnose issues with JSONL file"""

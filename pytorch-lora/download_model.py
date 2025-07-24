@@ -2,6 +2,10 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 
+# LOAD ENV VARIABLES
+from dotenv import load_dotenv
+load_dotenv()
+
 # Read model name from environment variable
 import os
 model_name = os.getenv("MODEL_NAME", "Qwen/Qwen2.5-1.5B-Instruct")

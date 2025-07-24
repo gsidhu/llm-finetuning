@@ -1,6 +1,10 @@
 import json
 import os
 
+# LOAD ENV VARIABLES
+from dotenv import load_dotenv
+load_dotenv()
+
 def format_prompt(example):
     """Format training examples into conversation format"""
     return f"""<|im_start|>user

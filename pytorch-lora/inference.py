@@ -5,6 +5,10 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 import os
 from utils import create_prompt_for_query
 
+# LOAD ENV VARIABLES
+from dotenv import load_dotenv
+load_dotenv()
+
 # --- 1. Configuration ---
 model_dir = os.getenv("MERGED_MODEL_OUTPUT_DIRECTORY", "intent-classifier-final")
 # The user's query you want to test

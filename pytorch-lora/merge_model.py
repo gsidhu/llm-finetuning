@@ -4,6 +4,10 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 from peft import PeftModel
 import os
 
+# LOAD ENV VARIABLES
+from dotenv import load_dotenv
+load_dotenv()
+
 # --- Configuration ---
 base_model_name = os.getenv("MODEL_NAME", "Qwen/Qwen2.5-1.5B-Instruct")
 adapter_path = os.getenv("FINETUNED_MODEL_OUTPUT_DIRECTORY", "finetuned-model")

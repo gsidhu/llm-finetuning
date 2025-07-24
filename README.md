@@ -196,7 +196,7 @@ chmod +x quantize.cpp
 ```
 (Quantization may not work yet. Need to figure it out.)
 
-3. Create the Ollama modelfile
+3. Create the Ollama modelfile ([see example](/qwen-voice-assistant-modefile))
 
 4. Load the modelfile in Ollama –
 ```

@@ -18,6 +18,10 @@ from peft import (
 from datasets import load_dataset
 from utils import format_prompt
 
+# LOAD ENV VARIABLES
+from dotenv import load_dotenv
+load_dotenv()
+
 # --- Configuration ---
 # Read model name from environment variable
 import os

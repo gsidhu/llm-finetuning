@@ -4,3 +4,6 @@ venv
 test_results.json
 log.txt
 __pycache__
+finetuned-model
+intent-classifier-final
+*.gguf

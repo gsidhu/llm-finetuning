@@ -4,3 +4,4 @@ protobuf
 sentencepiece
 datasets
 peft
+dotenv
