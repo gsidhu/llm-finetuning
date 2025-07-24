@@ -1,0 +1,6 @@
+.DS_Store
+venv
+.vscode
+test_results.json
+log.txt
+__pycache__

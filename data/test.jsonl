@@ -1,0 +1,28 @@
+{"User": "Play Wonderwall by Oasis.","Assistant": {"function": "play_music", "parameters": {"track_name": "Wonderwall", "artist_name": "Oasis"}}}
+{"User": "Play the album Definitely Maybe by Oasis.","Assistant": {"function": "play_music", "parameters": {"album_name": "Definitely Maybe", "artist_name": "Oasis"}}}
+{"User": "Stop the current audio playback.", "Assistant": {"function": "stop_audio_playback", "parameters": {}}}
+{"User": "Pause the music that is playing.", "Assistant": {"function": "pause_audio_playback", "parameters": {}}}
+{"User": "Resume the paused music.", "Assistant": {"function": "resume_audio_playback", "parameters": {}}}
+{"User": "What is the weather in Chicago?", "Assistant": {"function": "get_current_weather", "parameters": {"location": "Chicago"}}}
+{"User": "Search the internet for 'how to bake bread'.", "Assistant": {"function": "perform_web_search", "parameters": {"query": "how to bake bread"}}}
+{"User": "Tell me the current time.", "Assistant": {"function": "announce_current_time", "parameters": {}}}
+{"User": "What's the time in Tokyo?", "Assistant": {"function": "lookup_time_in_city_or_country", "parameters": {"city_or_country": "Tokyo"}}}
+{"User": "What is today's date?", "Assistant": {"function": "announce_current_date", "parameters": {}}}
+{"User": "Set a timer for 1 hour.", "Assistant": {"function": "start_countdown_timer", "parameters": {"duration_seconds": 3600}}}
+{"User": "Schedule an alarm for 6:00 AM.", "Assistant": {"function": "schedule_alarm", "parameters": {"time_string": "6:00 AM"}}}
+{"User": "Launch the calculator.", "Assistant": {"function": "launch_application", "parameters": {"application_name": "calculator"}}}
+{"User": "Fetch the latest news.", "Assistant": {"function": "fetch_latest_news", "parameters": {}}}
+{"User": "Set the system volume to 5.", "Assistant": {"function": "set_system_volume", "parameters": {"volume_level": 5}}}
+{"User": "Define the word 'eloquent'.", "Assistant": {"function": "lookup_word_definition", "parameters": {"word": "eloquent"}}}
+{"User": "Tell me a random joke.", "Assistant": {"function": "tell_random_joke", "parameters": {}}}
+{"User": "Close the voice assistant.", "Assistant": {"function": "terminate_assistant", "parameters": {}}}
+{"User": "Good afternoon.", "Assistant": {"function": "hello_give_time_appropriate_greeting", "parameters": {}}}
+{"User": "What are my events for tomorrow?", "Assistant": {"function": "retrieve_calendar_events", "parameters": {"target_date": "tomorrow"}}}
+{"User": "Add 'Doctor appointment' to my calendar for next Tuesday at 10 AM.", "Assistant": {"function": "create_calendar_event", "parameters": {"event_title": "Doctor appointment", "event_time": "10 AM", "event_date": "next Tuesday"}}}
+{"User": "Translate 'hello' to Spanish.", "Assistant": {"function": "translate_to_language", "parameters": {"source_text": "hello", "target_language": "Spanish"}}}
+{"User": "List all my active reminders.", "Assistant": {"function": "list_active_reminders", "parameters": {}}}
+{"User": "Remind me to call Mom at 7 PM.", "Assistant": {"function": "create_reminder", "parameters": {"reminder_message": "call Mom", "reminder_time": "7 PM"}}}
+{"User": "Start audio recording.", "Assistant": {"function": "start_audio_recording", "parameters": {}}}
+{"User": "Stop the current audio recording.", "Assistant": {"function": "end_audio_recording", "parameters": {}}}
+{"User": "Restart my computer.", "Assistant": {"function": "restart_computer", "parameters": {}}}
+{"User": "Beam me up, Scotty!", "Assistant": {"function": "did_not_understand", "parameters": {}}}
