@@ -1,6 +1,6 @@
 {"User": "Play Wonderwall by Oasis.","Assistant": {"function": "play_music", "parameters": {"track_name": "Wonderwall", "artist_name": "Oasis"}}}
+{"User": "Stop the current audio playback.", "Assistant": {"function": "pause_audio_playback", "parameters": {}}}
 {"User": "Play the album Definitely Maybe by Oasis.","Assistant": {"function": "play_music", "parameters": {"album_name": "Definitely Maybe", "artist_name": "Oasis"}}}
-{"User": "Stop the current audio playback.", "Assistant": {"function": "stop_audio_playback", "parameters": {}}}
 {"User": "Pause the music that is playing.", "Assistant": {"function": "pause_audio_playback", "parameters": {}}}
 {"User": "Resume the paused music.", "Assistant": {"function": "resume_audio_playback", "parameters": {}}}
 {"User": "What is the weather in Chicago?", "Assistant": {"function": "get_current_weather", "parameters": {"location": "Chicago"}}}

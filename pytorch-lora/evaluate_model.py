@@ -58,18 +58,14 @@ def get_model_prediction(user_input):
     """
     prompt = create_prompt_for_query(user_input)
     
-    # --- START OF THE FIX ---
-    # Set the truncation side on the tokenizer object itself. This is the correct way.
     tokenizer.truncation_side = 'left'
 
     inputs = tokenizer(
         prompt,
         return_tensors="pt",
         truncation=True,
-        max_length=2048  # Increased to handle the large system prompt
-        # The 'truncation_side' argument is removed from here.
+        max_length=2048
     )
-    # --- END OF THE FIX ---
 
     inputs = {k: v.to(model.device) for k, v in inputs.items()}
     
@@ -98,20 +94,57 @@ def parse_json_response(response_text):
     except (json.JSONDecodeError, IndexError):
         return None
 
+# --- START OF THE FIX ---
 def compare_json_outputs(predicted_json, expected_json):
+    """
+    Performs a strict comparison, normalizing parameter dictionaries to handle
+    the discrepancy between an empty dict {} and a dict with null values.
+
+    This function validates:
+    1.  The prediction is a valid JSON object with the required structure.
+    2.  'function', 'parameters', and 'confidence' keys exist and have correct types.
+    3.  'confidence' is a float between 0.0 and 1.0.
+    4.  'function' name matches.
+    5.  'parameters' are semantically identical after removing null values.
+    """
+    # 1. Basic structural and type checks
     if not predicted_json or not isinstance(expected_json, dict):
         return False
 
-    if predicted_json.get('function') != expected_json.get('function'):
+    required_keys = {"function", "parameters", "confidence"}
+    if set(predicted_json.keys()) != required_keys:
         return False
 
-    pred_params = predicted_json.get('parameters', {})
-    exp_params = expected_json.get('parameters', {})
-    
-    pred_params_norm = {k: str(v) for k, v in pred_params.items()}
-    exp_params_norm = {k: str(v) for k, v in exp_params.items()}
-    
-    return pred_params_norm == exp_params_norm
+    if not (
+        isinstance(predicted_json.get('function'), str) and
+        isinstance(predicted_json.get('parameters'), dict) and
+        isinstance(predicted_json.get('confidence'), (float, int)) and
+        0.0 <= predicted_json.get('confidence') <= 1.0
+    ):
+        return False
+
+    # 2. Compare the 'function' name
+    if predicted_json['function'] != expected_json.get('function'):
+        return False
+
+    # 3. Compare the 'parameters' dictionary after normalization
+    # Use `or {}` to gracefully handle a null value for the parameters key itself
+    expected_params = expected_json.get('parameters', {}) or {}
+    predicted_params = predicted_json.get('parameters', {}) or {}
+
+    # --- THIS IS THE KEY CHANGE ---
+    # Normalize both dictionaries by removing any key where the value is None (null).
+    # This makes an empty dict {} equivalent to a dict with only null values.
+    normalized_expected_params = {k: v for k, v in expected_params.items() if v is not None}
+    normalized_predicted_params = {k: v for k, v in predicted_params.items() if v is not None}
+
+    # Now, compare the normalized dictionaries for an exact match.
+    if normalized_predicted_params != normalized_expected_params:
+        return False
+
+    # If all checks pass, the prediction is correct.
+    return True
+# --- END OF THE FIX ---
 
 # --- 4. Evaluate on Test Set ---
 results = []

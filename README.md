@@ -5,6 +5,10 @@ The training data, system prompt, and almost all of the code has been generated 
 
 The values are optimised for an up to 1.5B parameter model running an M1 Pro MacBook Pro with 16GB RAM.
 
+The `gguf-py` directory comes from the [llama.cpp repo](https://github.com/ggml-org/llama.cpp/tree/master/gguf-py).
+
+The `convert_hf_to_gguf.py` script also comes from the [llama.cpp repo](https://github.com/ggml-org/llama.cpp/blob/master/convert_hf_to_gguf.py).
+
 ## I. Setup and Configuration
 1. Create a virtual environment and install the required packages.
 ```python
@@ -30,12 +34,12 @@ Run the fine tuning –
 python3 ./pytorch-lora/download_model.py
 # Run the fine tuning (see param explanation below)
 python3 ./pytorch-lora/finetune.py
+# Merge the fine tuned adapter with the base model
+python3 ./pytorch-lora/merge_model.py
 # (Optional) Run model evaluation on the test items
 python3 ./pytorch-lora/evaluate_model.py
 # (Optional) Test the model on a specific prompt
 python3 ./pytorch-lora/inference.py
-# Merge the fine tuned adapter with the base model
-python3 ./pytorch-lora/merge_model.py
 ```
 
 <details>
@@ -182,19 +186,17 @@ python3 ./pytorch-lora/merge_model.py
 ## III. Running in Ollama
 1. Convert the PyTorch model to GGUF for use with Ollama/llama.cpp –
 ```
-python convert_hf_to_gguf.py ./pytorch-lora/intent-classifier-final/ \              
+python gguf-py/convert_hf_to_gguf.py ./intent-classifier-final/ \              
   --outfile ./intent-classifier-final.f16.gguf \
   --outtype f16
 ```
 
 2. (Optional) Quantize –
 ```
-chmod +x quantize.cpp
-./quantize ./intent-classifier-final.f16.gguf \
-  ./intent-classifier-final.Q4_K_M.gguf \
-  Q4_K_M
+llama-quantize ./intent-classifier-final.f16.gguf ./intent-classifier-final.Q4_K_M.gguf Q4_K_M
 ```
-(Quantization may not work yet. Need to figure it out.)
+
+Make sure you have [llama.cpp installed](https://github.com/ggml-org/llama.cpp/blob/master/docs/install.md). I prefer homebrew.
 
 3. Create the Ollama modelfile ([see example](/qwen-voice-assistant-modefile))
 
